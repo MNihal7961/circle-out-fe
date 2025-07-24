@@ -11,7 +11,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     <div className="min-h-screen flex flex-col">
       <Header />
       <main className="flex-1">
-        <section className="max-w-[1600px] flex flex-col items-start justify-center mx-auto p-14">
+        <section className="max-w-[1600px] flex flex-col items-start justify-center mx-auto">
           {children}
         </section>
       </main>
