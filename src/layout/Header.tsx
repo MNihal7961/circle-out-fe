@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Menu } from "lucide-react";
 import MobileHeaderDrawer from "./MobileHeaderDrawer";
 import type { MainMenuItem } from "../interfaces/common";
+import { useNavigate } from "react-router-dom";
 
 const mainMenu: MainMenuItem[] = [
   {
@@ -10,7 +11,7 @@ const mainMenu: MainMenuItem[] = [
   },
   {
     label: "About us",
-    href: "#",
+    href: "",
   },
   {
     label: "Products",
@@ -23,6 +24,7 @@ const mainMenu: MainMenuItem[] = [
 const Header: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
+  const navigate = useNavigate();
 
   const handleMenuOpen = () => {
     setMobileDrawerOpen(true);
@@ -51,7 +53,7 @@ const Header: React.FC = () => {
         <div className="mx-auto max-w-7xl  lg:px-8">
           <div className="w-full flex flex-col lg:flex-row">
             <div className="flex justify-between lg:hidden px-4">
-              <a href="https://pagedone.io/" className="flex items-center">
+              <p className="flex items-center cursor-pointer" onClick={() => navigate("/")}>
                 <svg
                   width={164}
                   height={33}
@@ -126,7 +128,7 @@ const Header: React.FC = () => {
                     </linearGradient>
                   </defs>
                 </svg>
-              </a>
+              </p>
               <button
                 data-collapse-toggle="navbar"
                 type="button"
@@ -146,20 +148,20 @@ const Header: React.FC = () => {
               <ul className="flex lg:items-center max-lg:gap-4 max-lg:mb-4 flex-col mt-4 lg:flex-1 md:mt-0 lg:flex-row">
                 {mainMenu.map((item) => (
                   <li key={item.label}>
-                    <a
-                      href={item.href}
-                      className="text-gray-500 text-sm font-medium hover:text-prime-blue-700 transition-all duration-500 mb-2 block lg:mr-6 lg:text-base md:mb-0 md:mr-3 hover:text-gray-900 flex items-center"
+                    <p
+                      className="text-gray-500 text-sm font-medium hover:text-prime-blue-700 transition-all duration-500 mb-2  lg:mr-6 lg:text-base md:mb-0 md:mr-3 hover:text-gray-900 flex items-center cursor-pointer"
+                      onClick={() => item.href && navigate(item.href)}
                     >
                       {item.label}
-                    </a>
+                    </p>
                   </li>
                 ))}
               </ul>
               <div className="flex lg:items-center justify-start flex-col lg:flex-row max-lg:gap-4 lg:flex-1 lg:justify-end">
-                <button className="bg-indigo-50 text-indigo-600 rounded-full cursor-pointer font-semibold text-center shadow-xs transition-all duration-500 py-3 px-6 text-sm hover:bg-indigo-100">
+                <button className="bg-indigo-50 text-indigo-600 rounded-full cursor-pointer font-semibold text-center shadow-xs transition-all duration-500 py-3 px-6 text-sm hover:bg-indigo-100" onClick={() => navigate("/signin")}>
                   Login
                 </button>
-                <button className="bg-indigo-600 text-white rounded-full cursor-pointer font-semibold text-center shadow-xs transition-all duration-500 py-3 px-6 text-sm lg:ml-5 hover:bg-indigo-700">
+                <button className="bg-indigo-600 text-white rounded-full cursor-pointer font-semibold text-center shadow-xs transition-all duration-500 py-3 px-6 text-sm lg:ml-5 hover:bg-indigo-700" onClick={() => navigate("/signup")}>
                   Sign up
                 </button>
               </div>
